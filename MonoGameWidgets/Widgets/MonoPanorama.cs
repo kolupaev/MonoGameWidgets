@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace MonoGameWidgets.Widgets
 {
-    public class MonoPanorama : DrawableGameComponent
+    public class MonoPanorama
     {
         private readonly Queue<IAnimation> _animationQueue = new Queue<IAnimation>(4);
 
@@ -17,11 +17,8 @@ namespace MonoGameWidgets.Widgets
 
         private int _selectedIndex;
         private TouchLocation? _startTouch;
+        private bool _readonly;
 
-        public MonoPanorama(Game game)
-            : base(game)
-        {
-        }
 
         protected double DragToFlipTheshold
         {
@@ -35,12 +32,17 @@ namespace MonoGameWidgets.Widgets
 
         public void AddBackgorund(MonoPanoramaBackgroundItem item)
         {
+            if(_readonly)
+                throw new InvalidOperationException("Can't add background to initialized panorama.");
             _background.Add(item);
             _drawables.Add(item);
         }
 
         public void AddPanoramaItem(IMonoPanoramaItem item)
         {
+            if (_readonly)
+                throw new InvalidOperationException("Can't add background to initialized panorama.");
+
             _items.Add(item);
             _updateables.Add(item);
             _drawables.Add(item);
@@ -119,9 +121,9 @@ namespace MonoGameWidgets.Widgets
             InFlip = true;
         }
 
-        public override void Initialize()
+        public void Initialize()
         {
-            base.Initialize();
+            _readonly = true;
             for (int i = 0; i < _items.Count; i++)
             {
                 IMonoPanoramaItem item = _items[i];
@@ -129,7 +131,7 @@ namespace MonoGameWidgets.Widgets
             }
         }
 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             foreach (var drawable in _drawables)
             {
@@ -138,7 +140,7 @@ namespace MonoGameWidgets.Widgets
             }
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             HandleInput();
             if (_animationQueue.Count > 0)

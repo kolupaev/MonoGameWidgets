@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGameWidgets.Widgets;
+using MonoGameWidgetsDemo.Screens;
 
 namespace MonoGameWidgetsDemo
 {
@@ -19,6 +20,8 @@ namespace MonoGameWidgetsDemo
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            _screenManager = new ScreenManager(this);
+            Components.Add(_screenManager);
         }
 
         /// <summary>
@@ -29,8 +32,7 @@ namespace MonoGameWidgetsDemo
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            _screenManager.AddScreen(new MenuScreen());
             base.Initialize();
         }
 
@@ -42,18 +44,7 @@ namespace MonoGameWidgetsDemo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _monoPanorama = new MonoPanorama(this);
-            _monoPanorama.Enabled = true;
-            _monoPanorama.Visible = true;
-            _monoPanorama.AddBackgorund(new MonoPanoramaBackgroundItem(0.1f, Content.Load<Texture2D>(@"Layers\Sky_back_layer"), _spriteBatch));
-            _monoPanorama.AddBackgorund(new MonoPanoramaBackgroundItem(0.8f, Content.Load<Texture2D>(@"Layers\Vegetation"), _spriteBatch));
-            _monoPanorama.AddPanoramaItem(new MonoPanoramaItem(Content.Load<Texture2D>(@"Levels\1"), _spriteBatch, true));
-            _monoPanorama.AddPanoramaItem(new MonoPanoramaItem(Content.Load<Texture2D>(@"Levels\2"), _spriteBatch, true));
-            _monoPanorama.AddPanoramaItem(new MonoPanoramaItem(Content.Load<Texture2D>(@"Levels\3"), _spriteBatch, true));
-            _monoPanorama.AddPanoramaItem(new MonoPanoramaItem(Content.Load<Texture2D>(@"Levels\4"), _spriteBatch, true));
-            _monoPanorama.AddBackgorund(new MonoPanoramaBackgroundItem(1.5f, Content.Load<Texture2D>(@"Layers\Ground"), _spriteBatch));
-
-            base.Components.Add(_monoPanorama);
+            
         }
 
         /// <summary>
@@ -74,6 +65,8 @@ namespace MonoGameWidgetsDemo
         }
 
         private bool _isFirstUpdate = true;
+        private readonly ScreenManager _screenManager;
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
