@@ -1,4 +1,4 @@
 MonoGameWidgets
 ===============
 
-Panorama demo: http://youtu.be/QS068PgK-mc
+Panorama demo: http://www.youtube.com/watch?v=QS068PgK-mc&t=31s
