@@ -87,6 +87,8 @@
     <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Screens\ScreenState.cs" />
+    <Compile Include="Screens\Submenu1Screen.cs" />
+    <Compile Include="Screens\Submenu2Screen.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

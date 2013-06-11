@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameWidgetsDemo", "Mono
 		{2F7E97DB-C6FD-4440-8ED9-3479D2A4553C} = {2F7E97DB-C6FD-4440-8ED9-3479D2A4553C}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{CB183942-AB56-4B55-BAD0-B60EC51B8B3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -353,5 +355,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CCF3452-B8E8-42B3-9845-2D4777C8F85E} = {CB183942-AB56-4B55-BAD0-B60EC51B8B3A}
+		{2F7E97DB-C6FD-4440-8ED9-3479D2A4553C} = {CB183942-AB56-4B55-BAD0-B60EC51B8B3A}
 	EndGlobalSection
 EndGlobal

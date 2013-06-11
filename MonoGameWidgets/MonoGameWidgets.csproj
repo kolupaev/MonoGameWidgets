@@ -85,10 +85,12 @@
   <ItemGroup>
     <Compile Include="Animation\FuncAnimation.cs" />
     <Compile Include="Animation\ValueAnimation.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\IAnimation.cs" />
+    <Compile Include="Utils\AABB.cs" />
+    <Compile Include="Widgets\ButtonImpl\ButtonBase.cs" />
+    <Compile Include="Widgets\TextButton.cs" />
     <Compile Include="Widgets\Panorama\IMonoPanoramaItem.cs" />
     <Compile Include="Widgets\MonoPanorama.cs" />
     <Compile Include="Widgets\Panorama\MonoPanoramaBackgroundItem.cs" />
