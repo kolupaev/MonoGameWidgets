@@ -92,7 +92,7 @@ namespace MonoGameWidgetsDemo.Screens
         public ScreenState ScreenState
         {
             get { return screenState; }
-            protected set { screenState = value; }
+            set { screenState = value; }
         }
 
         ScreenState screenState = ScreenState.TransitionOn;
