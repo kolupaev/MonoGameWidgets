@@ -89,6 +89,7 @@
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\IAnimation.cs" />
     <Compile Include="Utils\AABB.cs" />
+    <Compile Include="Utils\InputManager.cs" />
     <Compile Include="Widgets\ButtonImpl\ButtonBase.cs" />
     <Compile Include="Widgets\TextButton.cs" />
     <Compile Include="Widgets\Panorama\IMonoPanoramaItem.cs" />

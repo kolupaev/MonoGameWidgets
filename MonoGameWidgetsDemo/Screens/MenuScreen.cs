@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input.Touch;
+using MonoGameWidgets.Utils;
 using MonoGameWidgets.Widgets.ButtonImpl;
 
 namespace MonoGameWidgetsDemo.Screens
@@ -9,6 +12,12 @@ namespace MonoGameWidgetsDemo.Screens
     {
         private SpriteFont _buttonFont;
         private TextButton _playButton;
+        private InputManager _inputManager;
+
+        public MenuScreen()
+        {
+            _inputManager = new InputManager();
+        }
 
         public override void LoadContent()
         {
@@ -19,6 +28,8 @@ namespace MonoGameWidgetsDemo.Screens
             _playButton = new TextButton(screenCenter, _buttonFont, "Play!", ScreenManager.SpriteBatch);
             _playButton.OnTap += PlayButtonOnOnTap;
             base.LoadContent();
+            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.FreeDrag | GestureType.DragComplete;
+
         }
 
         private void PlayButtonOnOnTap()
@@ -38,7 +49,8 @@ namespace MonoGameWidgetsDemo.Screens
 
         public override void HandleInput()
         {
-            _playButton.HandleInput();
+            _inputManager.ReadInput();
+            _playButton.HandleInput(_inputManager);
             base.HandleInput();
         }
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using MonoGameWidgets.Utils;
 
 namespace MonoGameWidgets.Widgets.ButtonImpl
 {
@@ -22,15 +23,15 @@ namespace MonoGameWidgets.Widgets.ButtonImpl
             if (handler != null) handler();
         }
 
-        public virtual void HandleInput()
+        public virtual void HandleInput(InputManager touches)
         {
-            var touches = TouchPanel.GetState();
             if (!_inTouch && touches.Count > 0 && touches[0].State == TouchLocationState.Pressed)
             {
                 var touch = touches[0];
                 if (InActiveArea(touch.Position))
                 {
-                    BeginSelection(touch);
+                    _touch = touch;
+                    _inTouch = true;
                 }
             }
             else if (_inTouch)
@@ -38,17 +39,31 @@ namespace MonoGameWidgets.Widgets.ButtonImpl
                 TouchLocation touch;
                 if (!touches.FindById(_touch.Id, out touch))
                 {
-                    BeginUnselection();
+                    _inTouch = false;
+                    BeginUnhighlight();
                 }
                 else
                 {
-                    if (InActiveArea(touch.Position))
+                    if (touch.State == TouchLocationState.Released && InActiveArea(touch.Position))
                     {
-                        BeginHighlight();
+                        if (!touches.IsHandled(touch.Id))
+                        {
+                            OnOnTap();
+                            touches.MarkAsHandled(touch.Id);
+                        }
+                        _inTouch = false;
+                        BeginUnhighlight();
                     }
                     else
                     {
-                        BeginUnhighlight();
+                        if (InActiveArea(touch.Position))
+                        {
+                            BeginHighlight();
+                        }
+                        else
+                        {
+                            BeginUnhighlight();
+                        }
                     }
                 }
             }
@@ -73,22 +88,7 @@ namespace MonoGameWidgets.Widgets.ButtonImpl
             _animationQueue.Enqueue(Animation.Value(Scale, 1.3f, TimeSpan.FromSeconds(0.3f), (v) => { Scale = v; }));
         }
 
-        private void BeginUnselection()
-        {
-            if (_highlighted)
-            {
-                OnOnTap();
-            }
-            BeginUnhighlight();
-            _inTouch = false;
-        }
-
-        private void BeginSelection(TouchLocation touch)
-        {
-            _inTouch = true;
-            _touch = touch;
-            BeginHighlight();
-        }
+      
 
         protected abstract bool InActiveArea(Vector2 position);
 
