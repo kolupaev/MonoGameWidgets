@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using MonoGameWidgets.Utils;
 
 namespace MonoGameWidgets.Widgets
 {
@@ -48,33 +49,37 @@ namespace MonoGameWidgets.Widgets
             _drawables.Add(item);
         }
 
-        public void HandleInput()
+        public void HandleInput(InputManager inputManager)
         {
-            TouchCollection state = TouchPanel.GetState();
             if (_startTouch == null)
             {
-                if (state.Count > 0)
-                    _startTouch = state[0];
+                if (inputManager.Count > 0 && inputManager[0].State == TouchLocationState.Pressed)
+                    _startTouch = inputManager[0];
             }
             else
             {
-                TouchLocation currentTouch;
-                bool touchFound = state.FindById(_startTouch.Value.Id, out currentTouch);
-                if (touchFound)
+                TouchLocation touch;
+                bool touchFound = inputManager.FindById(_startTouch.Value.Id, out touch);
+                if (!touchFound)
+                    return;
+                if (touch.State == TouchLocationState.Moved)
                 {
-                    CurrentPageOffset = (currentTouch.Position.X - _startTouch.Value.Position.X);
+                    CurrentPageOffset = (touch.Position.X - _startTouch.Value.Position.X);
                 }
                 else
                 {
                     _startTouch = null;
                     if (!InFlip)
                     {
-                        if (CurrentPageOffset < -TouchPanel.DisplayWidth * DragToFlipTheshold)
+                        var isHandled = inputManager.IsHandled(touch.Id);
+                        if (!isHandled && CurrentPageOffset < -TouchPanel.DisplayWidth * DragToFlipTheshold)
                         {
+                            inputManager.MarkAsHandled(touch.Id);
                             BeginFlip(1);
                         }
-                        else if (CurrentPageOffset > TouchPanel.DisplayWidth * DragToFlipTheshold)
+                        else if (!isHandled && CurrentPageOffset > TouchPanel.DisplayWidth * DragToFlipTheshold)
                         {
+                            inputManager.MarkAsHandled(touch.Id);
                             BeginFlip(-1);
                         }
                         else
@@ -142,7 +147,6 @@ namespace MonoGameWidgets.Widgets
 
         public void Update(GameTime gameTime)
         {
-            HandleInput();
             if (_animationQueue.Count > 0)
             {
                 IAnimation head = _animationQueue.Peek();

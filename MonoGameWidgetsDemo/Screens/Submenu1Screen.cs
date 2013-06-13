@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameWidgets.Utils;
 using MonoGameWidgets.Widgets;
 
 namespace MonoGameWidgetsDemo.Screens
@@ -7,6 +8,12 @@ namespace MonoGameWidgetsDemo.Screens
     public class Submenu1Screen : GameScreen
     {
         private MonoPanorama _monoPanorama;
+        private InputManager _inputManager;
+
+        public Submenu1Screen()
+        {
+            _inputManager = new InputManager();
+        }
 
         public override void LoadContent()
         {
@@ -33,7 +40,10 @@ namespace MonoGameWidgetsDemo.Screens
         }
         public override void HandleInput()
         {
-            _monoPanorama.HandleInput();
+            _inputManager.ReadInput();
+
+
+            _monoPanorama.HandleInput(_inputManager);
             base.HandleInput();
         }
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
