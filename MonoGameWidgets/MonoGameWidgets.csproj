@@ -91,6 +91,7 @@
     <Compile Include="Utils\AABB.cs" />
     <Compile Include="Utils\InputManager.cs" />
     <Compile Include="Widgets\ButtonImpl\ButtonBase.cs" />
+    <Compile Include="Widgets\ButtonImpl\IWidget.cs" />
     <Compile Include="Widgets\Panorama\ButtonPanoramaItem.cs" />
     <Compile Include="Widgets\TextButton.cs" />
     <Compile Include="Widgets\Panorama\IMonoPanoramaItem.cs" />

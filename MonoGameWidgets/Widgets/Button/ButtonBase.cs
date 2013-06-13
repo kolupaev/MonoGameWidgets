@@ -6,7 +6,7 @@ using MonoGameWidgets.Utils;
 
 namespace MonoGameWidgets.Widgets.ButtonImpl
 {
-    public abstract class ButtonBase
+    public abstract class ButtonBase : IWidget
     {
         protected float Scale = 1f;
         protected float Rotation;

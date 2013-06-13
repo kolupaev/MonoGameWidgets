@@ -4,13 +4,13 @@ using MonoGameWidgets.Widgets.ButtonImpl;
 
 namespace MonoGameWidgets.Widgets
 {
-    public class ButtonPanoramaItem : IMonoPanoramaItem
+    public class WidgetPanoramaItem : IMonoPanoramaItem
     {
         private readonly SpriteBatch _sb;
-        private readonly ButtonBase _button;
+        private readonly IWidget _button;
         private readonly Vector2 _centerOffset;
 
-        public ButtonPanoramaItem(SpriteBatch sb, ButtonBase button)
+        public WidgetPanoramaItem(SpriteBatch sb, IWidget button)
         {
             _sb = sb;
             _button = button;

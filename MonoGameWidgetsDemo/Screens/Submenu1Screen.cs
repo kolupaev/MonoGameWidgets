@@ -35,7 +35,7 @@ namespace MonoGameWidgetsDemo.Screens
             base.LoadContent();
         }
 
-        private ButtonBase Button(Texture2D texture2D)
+        private IWidget Button(Texture2D texture2D)
         {
             var textureButton = new TextureButton(texture2D, Vector2.Zero, ScreenManager.SpriteBatch);
             _buttons.Add(textureButton);
