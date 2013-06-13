@@ -91,11 +91,13 @@
     <Compile Include="Utils\AABB.cs" />
     <Compile Include="Utils\InputManager.cs" />
     <Compile Include="Widgets\ButtonImpl\ButtonBase.cs" />
+    <Compile Include="Widgets\Panorama\ButtonPanoramaItem.cs" />
     <Compile Include="Widgets\TextButton.cs" />
     <Compile Include="Widgets\Panorama\IMonoPanoramaItem.cs" />
     <Compile Include="Widgets\MonoPanorama.cs" />
     <Compile Include="Widgets\Panorama\MonoPanoramaBackgroundItem.cs" />
     <Compile Include="Widgets\Panorama\MonoPanoramaItem.cs" />
+    <Compile Include="Widgets\TextureButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->

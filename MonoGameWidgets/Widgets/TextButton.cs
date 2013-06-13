@@ -6,7 +6,7 @@ namespace MonoGameWidgets.Widgets.ButtonImpl
 {
     public class TextButton : ButtonBase
     {
-        private readonly Vector2 _position;
+        private Vector2 _position;
         private readonly SpriteFont _font;
         private readonly string _text;
         private readonly SpriteBatch _sb;
@@ -26,16 +26,21 @@ namespace MonoGameWidgets.Widgets.ButtonImpl
             _halfSize = _size / 2f;
 
 
-            _activeBox = new AABB(_position - _halfSize, _position + _halfSize).Inflate(new Vector2(20f));
+            _activeBox = new AABB(- _halfSize, _halfSize).Inflate(new Vector2(20f));
             _center = _activeBox.GetCenter();
         }
         protected override bool InActiveArea(Vector2 position)
         {
-            return _activeBox.Contains(position);
+            return _activeBox.Contains(position - _position);
         }
         public override void Draw(GameTime gameTime)
         {
             _sb.DrawString(_font, _text, _position, Color.Black, 0f, _halfSize, Scale, SpriteEffects.None, 1f);
+        }
+
+        public override void SetPosition(Vector2 position)
+        {
+            _position = position;
         }
     }
 }

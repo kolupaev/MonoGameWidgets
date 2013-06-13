@@ -107,5 +107,7 @@ namespace MonoGameWidgets.Widgets.ButtonImpl
         }
 
         public abstract void Draw(GameTime gameTime);
+
+        public abstract void SetPosition(Vector2 position);
     }
 }

@@ -28,13 +28,17 @@ namespace MonoGameWidgets.Widgets
                                 new Vector2(_texture.Width, _texture.Height) / 2f;
             }
         }
-
-        public void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
-            _sb.Draw(_texture, _offset + _centerAdjust, Color.White);
+            _sb.Draw(_texture, GetDrawOffset(), Color.White);
         }
 
-        public void Update(GameTime time)
+        protected Vector2 GetDrawOffset()
+        {
+            return _offset + _centerAdjust;
+        }
+
+        public virtual void Update(GameTime time)
         {
 
 
